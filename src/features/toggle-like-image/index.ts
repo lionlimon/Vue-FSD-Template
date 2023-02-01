@@ -1,0 +1,1 @@
+export { ToggleLikeImage } from './ui';

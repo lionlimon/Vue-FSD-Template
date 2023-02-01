@@ -1,0 +1,47 @@
+{
+  "name": "review-help",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "lint:script": "eslint --ext .ts,vue --ignore-path .gitignore . --fix",
+    "lint:style": "stylelint src/**/*.{css,scss,vue} --fix",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@vueuse/core": "^9.6.0",
+    "lodash": "^4.17.21",
+    "normalize.css": "^8.0.1",
+    "pinia": "^2.0.29",
+    "vue": "^3.2.45",
+    "vue-router": "4"
+  },
+  "devDependencies": {
+    "@feature-sliced/eslint-config": "^0.1.0-beta.6",
+    "@types/lodash": "^4.14.186",
+    "@types/node": "^18.8.3",
+    "@typescript-eslint/eslint-plugin": "^5.39.0",
+    "@vitejs/plugin-vue": "^3.1.0",
+    "@vue/eslint-config-typescript": "^11.0.2",
+    "eslint": "^8.25.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-import-resolver-typescript": "^3.5.1",
+    "eslint-plugin-boundaries": "^3.1.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-vue": "^9.6.0",
+    "husky": "^8.0.0",
+    "postcss-html": "^1.5.0",
+    "sass": "^1.55.0",
+    "stylelint": "^14.13.0",
+    "stylelint-config-recommended-scss": "^7.0.0",
+    "stylelint-config-recommended-vue": "^1.4.0",
+    "stylelint-config-standard-scss": "^5.0.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.2.5",
+    "vite-plugin-svg-icons": "^2.0.1",
+    "vue-tsc": "^0.40.4"
+  }
+}

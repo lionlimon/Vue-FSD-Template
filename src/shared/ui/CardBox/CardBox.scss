@@ -1,0 +1,36 @@
+.card {
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+
+  color: var(--text);
+  font-size: 14px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 8px 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  }
+
+  &__title {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.14;
+    margin: 0;
+  }
+
+  &__content {
+    word-break: break-word;
+    line-height: 1.29;
+    padding: 10px;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+}

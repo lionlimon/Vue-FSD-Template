@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Review helper",
+  "version": "0",
+  "icons": {
+    "16": "logo16.png",
+    "32": "logo32.png"
+  },
+  "action": {
+    "default_title": "Review helper",
+    "default_popup": "index.html"
+  }
+}

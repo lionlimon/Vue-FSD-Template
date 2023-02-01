@@ -1,0 +1,15 @@
+:root {
+  --black: 32, 31, 31;
+  --gray: 250, 249, 249;
+  --gray-light: 206, 206, 206;
+  --white: 255, 255, 255;
+  --red: 255, 116, 97;
+  --red-dark: 205, 94, 79;
+  --blue: 44, 180, 239;
+  --blue-dark: 40, 164, 218;
+  --success: 35, 241, 155;
+  --font: "Roboto", sans-serif;
+  --main-bg: var(--gray);
+  --text-invert: var(--white);
+  --text: var(--black);
+}

@@ -1,0 +1,1 @@
+export { ScaleImage } from './ui';

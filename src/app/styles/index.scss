@@ -1,0 +1,27 @@
+@import "/node_modules/normalize.css";
+@import "./variables";
+@import "./fonts";
+
+* { box-sizing: border-box; }
+
+html,
+body {
+  min-height: 464px;
+  min-width: 420px;
+}
+
+.app {
+  width: 100%;
+  font-family: var(--font);
+}
+
+/* Vue transitions */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}

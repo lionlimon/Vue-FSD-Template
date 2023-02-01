@@ -1,0 +1,1 @@
+export { useTypedStorage } from './useTypedStorage';

@@ -1,0 +1,32 @@
+.action-button {
+  width: 60px;
+  height: 60px;
+  padding: 5px;
+  border-radius: 6px;
+  border: none;
+  background-color: rgba(var(--white), 1);
+  cursor: pointer;
+  transition: background-color .25s,
+    transform .2s;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: rgba(var(--white), .7);
+  }
+
+  &:active {
+    transform: scale(0.88);
+  }
+
+  &--success {
+    background-color: rgb(var(--success));
+    color: rgb(var(--white));
+
+    &:hover {
+      background-color: rgb(var(--success));
+    }
+  }
+}
