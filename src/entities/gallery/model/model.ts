@@ -7,16 +7,18 @@ import { mapImageListFromApi } from './mappers';
 const useGalleryModel = defineStore('gallery', {
   state: () => ({
     images: [] as GalleryImage[],
+    foundedImages: [] as GalleryImage[],
     favoriteImages: useTypedStorage<string[]>('favoriteImages', []),
-    isLoading: false,
-    imageIsScealed: false,
+    getImagesIsLoading: false,
+    searchImageIsLoading: false,
+    imageIsScaled: false,
     scaledImageId: '',
   }),
 
   actions: {
     async loadImages() {
       try {
-        this.isLoading = true;
+        this.getImagesIsLoading = true;
         const data = await galleryApi.getImageList();
 
         this.images = mapImageListFromApi(data);
@@ -24,27 +26,67 @@ const useGalleryModel = defineStore('gallery', {
         console.error(e);
         throw e;
       } finally {
-        this.isLoading = false;
+        this.getImagesIsLoading = false;
       }
     },
 
-    toggleLike(id: string) {
-      if (this.favoriteImages.includes(id)) {
-        this.favoriteImages = this.favoriteImages.filter(
-          (localId) => localId !== id,
-        );
-      } else {
-        this.favoriteImages.push(id);
+    async likeImage(id: string) {
+      const image = this.images.find((image) => image.id === id);
+      try {
+        if (image) {
+          image.isLiked = true;
+        }
+
+        await galleryApi.likeImage(id);
+      } catch (e) {
+        console.error(e);
+
+        if (image) {
+          image.isLiked = false;
+        }
+
+        throw e;
+      }
+    },
+
+    async unlikeImage(id: string) {
+      const image = this.images.find((curImage) => curImage.id === id);
+      try {
+        if (image) {
+          image.isLiked = false;
+        }
+
+        await galleryApi.unlikeImage(id);
+      } catch (e) {
+        if (image) {
+          image.isLiked = true;
+        }
+        console.error(e);
+        throw e;
+      }
+    },
+
+    async searchImages(query: string) {
+      try {
+        this.searchImageIsLoading = true;
+        const data = await galleryApi.search(query);
+
+        this.foundedImages = mapImageListFromApi(data.results);
+      } catch (e) {
+        console.error(e);
+        throw e;
+      } finally {
+        this.searchImageIsLoading = false;
       }
     },
 
     scaleImage(id: string) {
-      this.imageIsScealed = true;
+      this.imageIsScaled = true;
       this.scaledImageId = id;
     },
 
     unscaleImage() {
-      this.imageIsScealed = false;
+      this.imageIsScaled = false;
       this.scaledImageId = '';
     },
   },

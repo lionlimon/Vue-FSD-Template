@@ -1,1 +1,7 @@
-export type GalleryImage = { url: string, id: string, alt: string | null, fullImageUrl: string }
+export type GalleryImage = {
+  url: string,
+  id: string,
+  alt: string | null,
+  fullImageUrl: string,
+  isLiked: boolean
+}

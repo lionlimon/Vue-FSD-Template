@@ -1,9 +1,9 @@
 import './styles/index.scss';
 import { createPinia } from 'pinia';
 import { createApp } from 'vue';
-import { router } from '@/pages';
 import { hasSlotPlugin } from '@/shared/lib/vue';
 import App from './App.vue';
+import { router } from './router';
 // eslint-disable-next-line import/no-unresolved
 import 'virtual:svg-icons-register';
 

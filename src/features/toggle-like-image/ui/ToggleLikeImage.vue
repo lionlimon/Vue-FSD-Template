@@ -1,6 +1,6 @@
 <template>
   <ActionButton
-    :active="buttonIsActive"
+    :active="isLiked"
     @click="onButtonClick"
   >
     <SvgIcon
@@ -12,13 +12,18 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import { useGalleryModel } from '@/entities/gallery';
 import ActionButton from '@/shared/ui/ActionButton';
 import SvgIcon from '@/shared/ui/SvgIcon';
 
-const props = defineProps<{ id: string }>();
+const props = defineProps<{ id: string, isLiked: boolean }>();
 const galleryModel = useGalleryModel();
-const onButtonClick = () => galleryModel.toggleLike(props.id);
-const buttonIsActive = computed(() => galleryModel.isLiked(props.id));
+
+const onButtonClick = () => {
+  if (props.isLiked) {
+    galleryModel.unlikeImage(props.id);
+  } else {
+    galleryModel.likeImage(props.id);
+  }
+};
 </script>

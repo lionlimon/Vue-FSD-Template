@@ -12,5 +12,8 @@ declare module '*.scss';
 interface ImportMeta {
   readonly env: {
     VITE_UNSPLASH_KEY: string
+    VITE_UNSPLASH_SECRET_KEY: string
   }
 }
+
+export {};

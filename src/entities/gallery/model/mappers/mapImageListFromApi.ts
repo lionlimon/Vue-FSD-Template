@@ -7,6 +7,7 @@ const mapImageListFromApi = (data: GetImageListResponse): GalleryImage[] => (
     url: responseItem.urls.regular,
     alt: responseItem.alt_description,
     fullImageUrl: responseItem.urls.full,
+    isLiked: responseItem.liked_by_user,
   }))
 );
 

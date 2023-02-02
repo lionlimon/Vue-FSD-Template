@@ -1,16 +1,34 @@
 import BaseApi from '../BaseApi';
-import { GetImageListResponse } from './types';
+import { GetImageListResponse, SearchImageListResponse } from './types';
 
 const GALLERY_BASE_URL = 'https://api.unsplash.com';
 export default class GalleryApi extends BaseApi {
   constructor() {
-    super();
-    this.baseUrl = GALLERY_BASE_URL;
+    super(GALLERY_BASE_URL);
   }
 
   getImageList() {
-    return this.http<GetImageListResponse>('/photos', {
-      client_id: import.meta.env.VITE_UNSPLASH_KEY,
-    });
+    return this.httpClient.get<GetImageListResponse>(
+      this.withBaseUrl('/photos'),
+    );
+  }
+
+  likeImage(photoId: string) {
+    return this.httpClient.post(
+      this.withBaseUrl(`/photos/${photoId}/like`),
+    );
+  }
+
+  unlikeImage(photoId: string) {
+    return this.httpClient.delete(
+      this.withBaseUrl(`/photos/${photoId}/like`),
+    );
+  }
+
+  search(query: string) {
+    return this.httpClient.get<SearchImageListResponse>(
+      this.withBaseUrl('/search/photos'),
+      { query },
+    );
   }
 }

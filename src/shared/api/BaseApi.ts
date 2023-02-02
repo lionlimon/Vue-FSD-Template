@@ -1,15 +1,24 @@
-import { Response } from './types';
+import { useStorage } from '@vueuse/core';
+import { http } from '@/shared/lib/http';
 
 export default class BaseApi {
-  protected baseUrl = 'http://0.0.0.0:8080/api/';
+  private baseUrl = '';
 
-  protected async http<T>(
-    url: string,
-    params?: Record<string, string>,
-  ): Promise<Response<T>> {
-    const searchParams = params ? `?${new URLSearchParams(params).toString()}` : '';
+  protected httpClient: typeof http;
 
-    const response = await fetch(`${this.baseUrl}${url}${searchParams}`);
-    return response.json();
+  constructor(baseUrl: string) {
+    this.baseUrl = baseUrl;
+    this.httpClient = http;
+
+    const { value: token } = useStorage('user.accessToken', '');
+
+    this.httpClient.setHeaders({
+      Authorization: token ? `Bearer ${token}`
+        : `Client-ID ${import.meta.env.VITE_UNSPLASH_KEY}`,
+    });
+  }
+
+  protected withBaseUrl(url: string) {
+    return this.baseUrl + url;
   }
 }

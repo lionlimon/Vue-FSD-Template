@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <GalleryPopup
-      :is-open="galleryModel.imageIsScealed"
+      :is-open="galleryModel.imageIsScaled"
       @on-overlay-click="galleryModel.unscaleImage()"
     >
       <GallerySingleImage
@@ -17,7 +17,7 @@
 
     <GalleryList>
       <GalleryCard
-        v-for="image in galleryModel.images"
+        v-for="image in imageSource"
         :key="image.id"
         :image="image"
       />
@@ -26,16 +26,29 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 import { GalleryCard } from '@/widgets/gallery-card';
 import { UnscaleImage } from '@/features/unscale-image';
 import {
   useGalleryModel, GalleryList, GalleryPopup, GallerySingleImage,
 } from '@/entities/gallery';
+import { useUserModel } from '@/entities/user';
 
 const galleryModel = useGalleryModel();
+const userModel = useUserModel();
+
+const imageSource = computed(() => {
+  if (galleryModel.foundedImages.length) {
+    return galleryModel.foundedImages;
+  }
+  return galleryModel.images;
+});
 
 onMounted(() => {
   galleryModel.loadImages();
+
+  if (userModel.isAuth) {
+    userModel.loadUserInfo();
+  }
 });
 </script>
