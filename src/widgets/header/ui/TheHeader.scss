@@ -1,0 +1,21 @@
+.header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  padding-bottom: 0;
+  position: relative;
+
+  &__login {
+    text-decoration: none;
+    color: rgb(var(--black));
+    font-weight: 700;
+  }
+
+  &__search {
+    width: 400px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

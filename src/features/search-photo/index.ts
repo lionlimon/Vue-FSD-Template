@@ -1,0 +1,1 @@
+export { SearchPhoto } from './ui';
