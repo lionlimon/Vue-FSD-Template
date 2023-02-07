@@ -1,2 +1,2 @@
-export { default as useGalleryModel } from './model';
+export { useGalleryModel } from './model';
 export * from './ui';

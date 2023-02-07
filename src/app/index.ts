@@ -9,6 +9,8 @@ import 'virtual:svg-icons-register';
 
 const initApp = () => {
   const pinia = createPinia();
+  pinia.use(({ store }) => { store.router = router; });
+
   const app = createApp(App);
 
   app.use(router);

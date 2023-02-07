@@ -5,6 +5,7 @@ const mapUserInformationFromApi = (data: GetUserInformationResponse): UserInfo =
   id: data.id,
   avatar: data.profile_image.small,
   fullName: data.name,
+  username: data.username,
 });
 
 export default mapUserInformationFromApi;

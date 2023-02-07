@@ -31,4 +31,10 @@ export default class GalleryApi extends BaseApi {
       { query },
     );
   }
+
+  getLikedImageList(username: string) {
+    return this.httpClient.get<GetImageListResponse>(
+      this.withBaseUrl(`/users/${username}/likes`),
+    );
+  }
 }

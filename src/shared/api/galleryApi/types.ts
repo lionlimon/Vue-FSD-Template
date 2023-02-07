@@ -2,7 +2,7 @@ type Image = {
   id: string,
   urls: Record<'full' | 'raw' | 'regular' | 'small' | 'thumb' | 'small_s3', string>,
   alt_description: string | null,
-  liked_by_user: boolean
+  liked_by_user: boolean,
 }
 
 export type GetImageListResponse = Image[];

@@ -4,17 +4,17 @@
   padding: 5px;
   border-radius: 6px;
   border: none;
-  background-color: rgba(var(--white), 1);
+  background-color: rgb(var(--white) 1);
   cursor: pointer;
-  transition: background-color .25s,
-    transform .2s;
-
+  transition:
+    background-color 0.25s,
+    transform 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
 
   &:hover {
-    background-color: rgba(var(--white), .7);
+    background-color: rgb(var(--white) 0.7);
   }
 
   &:active {

@@ -1,6 +1,7 @@
 export type GetUserInformationResponse = {
   id: string,
   name: string,
+  username: string
   profile_image: Record<'large' | 'medium' | 'small', string>
 };
 

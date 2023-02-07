@@ -1,9 +1,8 @@
 <template>
-  <TheHeader />
-  <main>
+  <DefaultLayout>
     <RouterView />
-  </main>
+  </Defaultlayout>
 </template>
 <script setup lang="ts">
-import { TheHeader } from '@/widgets/header/';
+import { DefaultLayout } from '@/pages/layouts/default';
 </script>

@@ -15,40 +15,79 @@
       </template>
     </GalleryPopup>
 
-    <GalleryList>
-      <GalleryCard
-        v-for="image in imageSource"
-        :key="image.id"
-        :image="image"
-      />
-    </gallerylist>
+    <Transition
+      mode="out-in"
+      name="fade"
+    >
+      <GallerySkeleton v-if="galleryModel.getImagesIsLoading" />
+      <GalleryList v-else>
+        <GalleryCard
+          v-for="image in imageSource"
+          :key="image.id"
+          :image="image"
+        />
+      </gallerylist>
+    </Transition>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, watch } from 'vue';
+import { useRoute } from 'vue-router';
 import { GalleryCard } from '@/widgets/gallery-card';
 import { UnscaleImage } from '@/features/unscale-image';
 import {
-  useGalleryModel, GalleryList, GalleryPopup, GallerySingleImage,
+  useGalleryModel,
+  GalleryList,
+  GalleryPopup,
+  GallerySingleImage,
+  GallerySkeleton,
 } from '@/entities/gallery';
 import { useUserModel } from '@/entities/user';
 
 const galleryModel = useGalleryModel();
 const userModel = useUserModel();
+const route = useRoute();
+
+const isLikedFilter = computed(() => route.query?.filter === 'liked');
 
 const imageSource = computed(() => {
-  if (galleryModel.foundedImages.length) {
+  const hasFoundedImages = galleryModel.foundedImages.length;
+
+  if (hasFoundedImages) {
     return galleryModel.foundedImages;
   }
-  return galleryModel.images;
+
+  return galleryModel.imagesByFilter;
 });
 
-onMounted(() => {
-  galleryModel.loadImages();
+const loadLikedImages = () => {
+  if (userModel.userInfo) {
+    galleryModel.loadLikedImages(userModel.userInfo.username);
+  }
+};
+
+onMounted(async () => {
+  if (!isLikedFilter.value) {
+    galleryModel.loadImages();
+  }
 
   if (userModel.isAuth) {
-    userModel.loadUserInfo();
+    await userModel.loadUserInfo();
+
+    if (isLikedFilter.value) {
+      loadLikedImages();
+    }
+  }
+});
+
+watch(route, () => {
+  const listIsEmpty = !galleryModel.imagesByFilter.length;
+
+  if (isLikedFilter.value && listIsEmpty && userModel.userInfo) {
+    galleryModel.loadLikedImages(userModel.userInfo.username);
+  } else if (listIsEmpty) {
+    galleryModel.loadImages();
   }
 });
 </script>
